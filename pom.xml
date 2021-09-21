@@ -23,6 +23,7 @@
             <artifactId>azure-functions-java-library</artifactId>
             <version>${azure.functions.java.library.version}</version>
         </dependency>
+		        <!-- luyza -->
 
         <!-- Test -->
         <dependency>
