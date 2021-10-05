@@ -3,36 +3,32 @@ package com.function;
 import java.util.*;
 import com.microsoft.azure.functions.annotation.*;
 import com.microsoft.azure.functions.*;
-
-/**
- * Azure Functions with HTTP Trigger.
- */
+//chamando as funções do azure
 public class Exercicio1 {
-    /**
-     * This function listens at endpoint "/api/Exercicio1". Two ways to invoke it using "curl" command in bash:
-     * 1. curl -d "HTTP Body" {your host}/api/Exercicio1
-     * 2. curl {your host}/api/Exercicio1?name=HTTP%20Query
-     */
+//programa para verificar qual número foi digitado na url, é dara uma resposta por Http
     @FunctionName("Exercicio1")
     public HttpResponseMessage run(
             @HttpTrigger(name = "req", 
             methods = {HttpMethod.GET},
+            //o metodo aceito aqui vai ser o metodo GET 
             route= "exercicio1/{valor}",
              authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> request,
             @BindingName("valor") Integer valor, 
+            //só vai ser aceito números inteiros
              final
              ExecutionContext context) {
 
         context.getLogger().info("Java HTTP trigger processed a request.");
-
-
-
        
         if (valor > 5) {
-        
+        //se o valor for maior menor que 5 ele retornara 404
+
             return request.createResponseBuilder(HttpStatus.NOT_FOUND).build();
         } else {
-            return request.createResponseBuilder(HttpStatus.OK).body("o valor é" + valor).build();
+            return request.createResponseBuilder(HttpStatus.OK).body("o valor que você digitou é " + valor).build();
+        //se o valor for menor que 5 ele retornara 200
+ 
         }
+
     }
 }
